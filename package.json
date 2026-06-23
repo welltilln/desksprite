@@ -1,0 +1,39 @@
+{
+  "name": "desksprite",
+  "version": "1.0.0",
+  "description": "A tiny pixel office worker for your web page — sits at a CRT desk, walks around, and you can grab, throw, and toss it back into its seat. Zero dependencies, one script tag.",
+  "main": "desksprite.js",
+  "module": "desksprite.js",
+  "unpkg": "desksprite.js",
+  "type": "commonjs",
+  "files": [
+    "desksprite.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "demo": "echo \"Open demo/index.html in a browser\""
+  },
+  "keywords": [
+    "desktop-pet",
+    "desk-pet",
+    "pixel",
+    "mascot",
+    "canvas",
+    "companion",
+    "buddy",
+    "vanilla-js",
+    "no-dependencies",
+    "widget"
+  ],
+  "author": "welltilln",
+  "license": "MIT",
+  "homepage": "https://github.com/welltilln/desksprite#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/welltilln/desksprite.git"
+  },
+  "bugs": {
+    "url": "https://github.com/welltilln/desksprite/issues"
+  }
+}

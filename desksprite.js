@@ -47,31 +47,37 @@
   function injectCSS() {
     if (cssInjected) return; cssInjected = true;
     const css = `
-.desksprite-desk{display:inline-block;background:#0C0F14;border-radius:11px;padding:9px;
-  border:1px solid #05070A;box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.05);}
+/* Chrome colours are themeable via CSS vars with dark defaults — standalone looks
+   identical (a dark CRT); a host page can set --ds-* to follow its own theme.
+   Themeable: --ds-accent (border/highlight), --ds-bezel + --ds-bezel-edge (the desk
+   case), --ds-readout (clock/status/calendar text), --ds-cal-dim (faint calendar
+   days), --ds-bubble-bg + --ds-bubble-ink (speech bubble). The CRT screen + the
+   pixel scene inside it stay fixed (it's a lit monitor, not a themed surface). */
+.desksprite-desk{display:inline-block;background:var(--ds-bezel,#0C0F14);border-radius:11px;padding:9px;
+  border:1px solid var(--ds-bezel-edge,#05070A);box-shadow:0 6px 18px rgba(0,0,0,.45),0 0 0 1px rgba(255,255,255,.05);}
 .desksprite-desk.float{position:fixed;left:14px;bottom:14px;z-index:2147483600;}
 .desksprite-screen{position:relative;border-radius:7px;overflow:hidden;background:#06080C;
   box-shadow:inset 0 0 22px rgba(0,0,0,.7);transition:box-shadow .3s;cursor:grab;touch-action:none;}
-.desksprite-screen.drop{box-shadow:inset 0 0 22px rgba(0,0,0,.5),0 0 0 2px var(--ds-accent),0 0 16px var(--ds-accent);}
+.desksprite-screen.drop{box-shadow:inset 0 0 22px rgba(0,0,0,.5),0 0 0 2px var(--ds-accent,#3794FF),0 0 16px var(--ds-accent,#3794FF);}
 .desksprite-pet{display:block;width:100%;aspect-ratio:220/150;image-rendering:pixelated;}
 .desksprite-scan{position:absolute;inset:0;pointer-events:none;
   background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.16) 2px,rgba(0,0,0,.16) 3px);}
 .desksprite-readout{display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px;padding:8px 4px 2px;
-  color:#54E08A;font-family:ui-monospace,'Cascadia Code',Consolas,monospace;}
+  color:var(--ds-readout,#54E08A);font-family:ui-monospace,'Cascadia Code',Consolas,monospace;}
 .desksprite-status{font-size:9px;letter-spacing:1px;font-weight:700;}
-.desksprite-status.s-working{color:#46D9D0;} .desksprite-status.s-done{color:#6BFFA8;} .desksprite-status.s-error{color:#FF7A7A;}
-.desksprite-clock{font-size:10px;text-align:right;color:#7CEBA8;}
+.desksprite-status.s-working{color:var(--ds-working,#46D9D0);} .desksprite-status.s-done{color:var(--ds-done,#6BFFA8);} .desksprite-status.s-error{color:var(--ds-error,#FF7A7A);}
+.desksprite-clock{font-size:10px;text-align:right;color:var(--ds-readout,#7CEBA8);}
 .desksprite-cal{grid-column:1/-1;display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-top:5px;
   font-family:ui-monospace,monospace;font-weight:500;}
-.desksprite-cal .d{font-size:8.5px;text-align:center;color:#2E5C42;padding:1px 0;border-radius:3px;}
-.desksprite-cal .d.today{background:#54E08A;color:#06140C;font-weight:700;}
-.desksprite-cal .d.dim{color:#1C3A28;}
+.desksprite-cal .d{font-size:8.5px;text-align:center;color:var(--ds-cal-dim,#2E5C42);padding:1px 0;border-radius:3px;}
+.desksprite-cal .d.today{background:var(--ds-today-bg,#54E08A);color:var(--ds-today-ink,#06140C);font-weight:700;}
+.desksprite-cal .d.dim{color:var(--ds-cal-dim,#1C3A28);}
 .desksprite-free{position:fixed;top:0;left:0;width:60px;height:60px;z-index:2147483601;display:none;
   image-rendering:pixelated;cursor:grab;touch-action:none;will-change:transform;
   filter:drop-shadow(0 5px 5px rgba(0,0,0,.5));}
 .desksprite-bubble{position:fixed;top:0;left:0;z-index:2147483602;pointer-events:none;
   font-family:ui-monospace,'Cascadia Code',Consolas,monospace;font-size:11px;line-height:1.4;
-  color:#E3E3E3;background:#1F1F1F;border:1px solid var(--ds-accent);padding:5px 9px;border-radius:9px;
+  color:var(--ds-bubble-ink,#E3E3E3);background:var(--ds-bubble-bg,#1F1F1F);border:1px solid var(--ds-accent,#3794FF);padding:5px 9px;border-radius:9px;
   box-shadow:0 4px 12px rgba(0,0,0,.4);opacity:0;transform:translateY(4px);transition:opacity .2s,transform .2s;white-space:nowrap;}
 .desksprite-bubble.show{opacity:1;transform:translateY(0);}
 @media(prefers-reduced-motion:reduce){.desksprite-bubble{transition:none;}}`;

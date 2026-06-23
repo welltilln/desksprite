@@ -117,6 +117,41 @@ pet.destroy();
 
 ---
 
+## Theming
+
+Out of the box it's a **dark CRT**. To make it follow your site's theme, set these CSS
+custom properties on the desksprite elements (or `:root`) — each has a dark default, so
+you only override what you want, and they update live when your theme changes:
+
+| Variable | Themes | Default |
+|---|---|---|
+| `--ds-accent` | speech-bubble border + drop highlight | `#3794FF` |
+| `--ds-bezel` | the desk case background | `#0C0F14` |
+| `--ds-bezel-edge` | desk case border | `#05070A` |
+| `--ds-readout` | clock / idle status / calendar text | `#54E08A` |
+| `--ds-working` / `--ds-done` / `--ds-error` | status text per state | `#46D9D0` / `#6BFFA8` / `#FF7A7A` |
+| `--ds-cal-dim` | faint (non-today) calendar days | `#2E5C42` |
+| `--ds-today-bg` / `--ds-today-ink` | calendar "today" highlight | `#54E08A` / `#06140C` |
+| `--ds-bubble-bg` | speech-bubble background | `#1F1F1F` |
+| `--ds-bubble-ink` | speech-bubble text | `#E3E3E3` |
+
+```css
+/* Make the pet follow a light/dark theme (vars flip with your own theme tokens) */
+.desksprite-desk, .desksprite-bubble, .desksprite-free{
+  --ds-accent:     var(--my-accent);
+  --ds-bezel:      var(--my-panel);
+  --ds-bezel-edge: var(--my-border);
+  --ds-readout:    var(--my-muted);
+  --ds-cal-dim:    var(--my-faint);
+  --ds-bubble-bg:  var(--my-surface);
+  --ds-bubble-ink: var(--my-text);
+}
+```
+(The CRT screen and the pixel scene inside it are intentionally fixed — it's a lit
+monitor, not a themed surface.)
+
+---
+
 ## How you interact with it
 
 | Action | Result |

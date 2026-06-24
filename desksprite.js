@@ -499,7 +499,31 @@
     return { setStatus, say, destroy, el: deskEl };
   }
 
-  const DeskSprite = { start, version: '1.0.0' };
+  // ── Skin format helpers (pure; exported for tooling/tests) ──────────────────
+  function validateSkin(s) {
+    const e = [];
+    if (!s || typeof s !== 'object') return { ok: false, errors: ['not an object'] };
+    if (!s.palette || typeof s.palette !== 'object') e.push('palette missing');
+    if (!s.size || !(s.size.w > 0) || !(s.size.h > 0)) e.push('size invalid');
+    const F = s.frames || {};
+    const isFrame = f => Array.isArray(f) && f.length > 0 && f.every(r => typeof r === 'string')
+      && f.every(r => r.length === f[0].length);
+    if (!isFrame(F.idle)) e.push('frames.idle required (string[])');
+    if (!isFrame(F.held)) e.push('frames.held required (string[])');
+    if (!(Array.isArray(F.walk) && F.walk.length > 0 && F.walk.every(isFrame))) e.push('frames.walk required (frame[])');
+    const all = [F.idle, F.held, F.fall, F.work, F.done, F.error, F.eat, F.carry, ...(F.walk || [])].filter(isFrame);
+    if (s.size) for (const f of all) { if (f.length > s.size.h || f[0].length > s.size.w) { e.push('a frame exceeds size'); break; } }
+    return { ok: e.length === 0, errors: e };
+  }
+  function frameToGrid(rows, palette) {
+    return rows.map(row => Array.from(row, ch => {
+      if (ch === '.' || ch === ' ') return null;
+      const c = palette[ch];
+      return (c === undefined) ? null : c;   // unknown char = transparent
+    }));
+  }
+
+  const DeskSprite = { start, version: '2.0.0', validateSkin, frameToGrid };
   if (typeof module !== 'undefined' && module.exports) module.exports = DeskSprite;
   global.DeskSprite = DeskSprite;
 })(typeof window !== 'undefined' ? window : this);

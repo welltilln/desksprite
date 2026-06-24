@@ -1,8 +1,13 @@
 # desksprite
 
-> A tiny pixel office worker for your web page. Zero dependencies, one `<script>`.
+> A tiny **JavaScript desktop pet** (web mascot / browser buddy) for your web page. Zero dependencies, one `<script>`. A vanilla-JS alternative to **Shimeji** and **oneko**.
 
-`desksprite` drops a little pixel character onto your site who **sits working at a CRT desk**. It occasionally gets up to **walk around the page**, and you can **grab it** (it dangles from your cursor, scared of heights), **throw it** (real gravity + momentum), and **toss it back onto the desk** (it glides smoothly into the seat). At **noon it eats lunch**. Wire your own status — a build, a download, anything — into its monitor with `setStatus()`, or just let it be cute.
+**[▶ Live demo](https://welltilln.github.io/desksprite/)**
+
+<!-- High-impact: record a short GIF (grab → throw → seat → lunch) and drop it here:
+     ![desksprite demo](docs/demo.gif)   ← a GIF at the top drives stars (a GitHub ranking signal). -->
+
+`desksprite` drops a little pixel character ("desktop pet") onto your site who **sits working at a CRT desk**. It occasionally gets up to **walk around the page**, and you can **grab it** (it dangles from your cursor, scared of heights), **throw it** (real gravity + momentum), and **toss it back onto the desk** (it glides smoothly into the seat). At **noon it eats lunch**. Wire your own status — a build, a download, anything — into its monitor with `setStatus()`, or just let it be cute.
 
 No build step, no framework, no dependencies. It draws itself on `<canvas>` and injects its own styles.
 
